@@ -1,0 +1,4 @@
+# RamseyTh
+
+Building: 
+`mvn package`
