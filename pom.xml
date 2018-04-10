@@ -16,7 +16,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>Bounds3Col</mainClass>
+                            <mainClass>CodeTest</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
@@ -26,7 +26,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>Bounds3Col</mainClass>
+                            <mainClass>CodeTest</mainClass>
                         </manifest>
                     </archive>
                     <descriptorRefs>
