@@ -25,6 +25,13 @@ public class Ramsey2ColBounder {
     }
 
     public BigInteger boundR(int a, int b) {
+        //edge case defense
+        if (a == 1 || b == 1) {
+            return new BigInteger("1");
+        }
+        if (a <= 0 || b <= 0) {
+            throw new IllegalArgumentException("a, b must be positive");
+        }
         //order irrelevant, so force a <= b
         if (a > b) {
             return boundR(b, a);

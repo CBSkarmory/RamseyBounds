@@ -30,6 +30,10 @@ public class Runner {
         System.out.println(clique1);*/
 
         // bounds on numbers
+        boundNums();
+    }
+
+    private static void boundNums() {
         Ramsey3ColBounder bounder = new Ramsey3ColBounder();
         int N = 10;
         for (int a = 2; a <= N; ++a) {

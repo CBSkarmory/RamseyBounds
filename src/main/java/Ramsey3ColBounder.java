@@ -29,6 +29,13 @@ public class Ramsey3ColBounder {
    }
 
    public BigInteger boundR(int a, int b, int c) {
+       //edge case defense
+       if (a == 1 || b == 1 || c == 1) {
+           return new BigInteger("1");
+       }
+       if (a <= 0 || b <= 0 || c <= 0) {
+           throw new IllegalArgumentException("a, b, c must be positive");
+       }
        //order irrelevant, so force a <= b <= c
        if (a > b || b > c) {
            int[] tmp = new int[3];
