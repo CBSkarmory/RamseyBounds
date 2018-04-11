@@ -16,7 +16,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>CodeTest</mainClass>
+                            <mainClass>Runner</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
@@ -26,7 +26,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>CodeTest</mainClass>
+                            <mainClass>Runner</mainClass>
                         </manifest>
                     </archive>
                     <descriptorRefs>

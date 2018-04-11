@@ -25,9 +25,9 @@ public class Ramsey2ColBounder {
     }
 
     public BigInteger boundR(int a, int b) {
-        //assert a <= b
+        //order irrelevant, so force a <= b
         if (a > b) {
-            throw new IllegalArgumentException("a <= b constraint violated");
+            return boundR(b, a);
         }
         //assert b <= 10
         if (b > MAX_B_VAL && !SAFETY) {

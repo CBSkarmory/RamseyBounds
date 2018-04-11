@@ -1,3 +1,4 @@
+import java.lang.reflect.Array;
 import java.math.BigInteger;
 import java.util.*;
 
@@ -28,9 +29,12 @@ public class Ramsey3ColBounder {
    }
 
    public BigInteger boundR(int a, int b, int c) {
-       //assert a <= b <= c
+       //order irrelevant, so force a <= b <= c
        if (a > b || b > c) {
-           throw new IllegalArgumentException("a <= b <= c constraint violated");
+           int[] tmp = new int[3];
+           tmp[0] = a; tmp[1] = b; tmp[2] = c;
+           Arrays.sort(tmp);
+           a = tmp[0]; b = tmp[1]; c = tmp[2];
        }
        //assert c <= 10
        if (c > MAX_C_VAL && !SAFETY) {
