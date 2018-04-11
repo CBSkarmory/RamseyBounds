@@ -7,6 +7,7 @@ import org.jgrapht.graph.SimpleGraph;
 
 import java.util.Iterator;
 import java.util.Set;
+import java.util.stream.IntStream;
 
 public class Runner {
     public static void main(String[] args) {
@@ -24,14 +25,18 @@ public class Runner {
                 }
             }
         }
+
         BronKerboschCliqueFinder<Integer, DefaultEdge> finder = new BronKerboschCliqueFinder<Integer, DefaultEdge>(g);
         Iterator<Set<Integer>> it = finder.maximumIterator();
         Set<Integer> clique1 = it.next();
         System.out.println(clique1);*/
 
         // bounds on numbers
-        boundNums();
+        //boundNums();
+
     }
+
+
 
     private static void boundNums() {
         Ramsey3ColBounder bounder = new Ramsey3ColBounder();
