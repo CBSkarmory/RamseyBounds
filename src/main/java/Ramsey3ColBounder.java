@@ -1,4 +1,3 @@
-import java.lang.reflect.Array;
 import java.math.BigInteger;
 import java.util.*;
 
@@ -13,10 +12,13 @@ import java.util.*;
 
 public class Ramsey3ColBounder {
    private static final int MAX_C_VAL = 10;
-   private HashMap<List<Integer>, BigInteger> memo;
    private final boolean SAFETY;
-
    private Ramsey2ColBounder twoColBounder;
+
+   private static HashMap<List<Integer>, BigInteger> memo;
+   static {
+       memo = new HashMap<List<Integer>, BigInteger>();
+   }
 
    public Ramsey3ColBounder() {
        this(false);
@@ -24,7 +26,6 @@ public class Ramsey3ColBounder {
 
    public Ramsey3ColBounder(boolean allowLargerThan10) {
        SAFETY = allowLargerThan10;
-       memo = new HashMap<List<Integer>, BigInteger>();
        twoColBounder = new Ramsey2ColBounder();
    }
 

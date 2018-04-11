@@ -14,14 +14,18 @@ import java.util.HashMap;
 public class Ramsey2ColBounder {
     private static final int MAX_B_VAL = 10;
     private final boolean SAFETY;
-    private HashMap<Pair<Integer, Integer>, BigInteger> memo;
+
+    static private HashMap<Pair<Integer, Integer>, BigInteger> memo;
+    static {
+        memo = new HashMap<Pair<Integer, Integer>, BigInteger>();
+    }
 
     public Ramsey2ColBounder() {
         this(false);
     }
     public Ramsey2ColBounder(boolean allowLargerThan10) {
         SAFETY = allowLargerThan10;
-        memo = new HashMap<Pair<Integer, Integer>, BigInteger>();
+
     }
 
     public BigInteger boundR(int a, int b) {
