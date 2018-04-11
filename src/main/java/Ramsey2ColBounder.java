@@ -1,4 +1,4 @@
-import javafx.util.Pair;
+import org.jgrapht.alg.util.Pair;
 
 import java.math.BigInteger;
 import java.util.HashMap;
