@@ -11,8 +11,10 @@ import java.util.*;
  */
 
 public class Ramsey3ColBounder {
+   private static final int MAX_C_VAL = 10;
    private HashMap<List<Integer>, BigInteger> memo;
-   private final boolean SAFTEY;
+   private final boolean SAFETY;
+
    private Ramsey2ColBounder twoColBounder;
 
    public Ramsey3ColBounder() {
@@ -20,7 +22,7 @@ public class Ramsey3ColBounder {
    }
 
    public Ramsey3ColBounder(boolean allowLargerThan10) {
-       SAFTEY = allowLargerThan10;
+       SAFETY = allowLargerThan10;
        memo = new HashMap<List<Integer>, BigInteger>();
        twoColBounder = new Ramsey2ColBounder();
    }
@@ -31,7 +33,7 @@ public class Ramsey3ColBounder {
            throw new IllegalArgumentException("a <= b <= c constraint violated");
        }
        //assert c <= 10
-       if (c > 10 && !SAFTEY) {
+       if (c > MAX_C_VAL && !SAFETY) {
            throw new IllegalArgumentException("c <= 10 constraint violated");
        }
 
