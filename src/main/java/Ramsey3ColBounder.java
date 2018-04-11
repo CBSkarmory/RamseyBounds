@@ -13,6 +13,7 @@ import java.util.*;
 public class Ramsey3ColBounder {
    private HashMap<List<Integer>, BigInteger> memo;
    private final boolean SAFTEY;
+   private Ramsey2ColBounder twoColBounder;
 
    public Ramsey3ColBounder() {
        this(false);
@@ -21,6 +22,7 @@ public class Ramsey3ColBounder {
    public Ramsey3ColBounder(boolean allowLargerThan10) {
        SAFTEY = allowLargerThan10;
        memo = new HashMap<List<Integer>, BigInteger>();
+       twoColBounder = new Ramsey2ColBounder();
    }
 
    public BigInteger boundR(int a, int b, int c) {
@@ -40,11 +42,25 @@ public class Ramsey3ColBounder {
        //check if previously computed
        if (memo.containsKey(tuple)) {
            return memo.get(tuple);
-       } else {
-           //compute a bound
-           //TODO
-           //memoize it
-           //TODO
        }
+       //compute a bound
+       BigInteger val;
+
+       if (tup[0] == 2 && tup[1] == 2) {
+           //thm: R(2, 2, c) = c ... and symmetric cases
+           val = new BigInteger("" + c);
+       } else if (tup[0] == 2) {
+           //thm: R(2, b, c) = R(b, c) ... and symmetric cases
+           val = twoColBounder.boundR(b, c);
+       } else {
+           //thm: R(a, b, c) <= R(a-1, b, c) + R(a, b-1, c) + R(a, b, c-1)
+           val = boundR(a - 1, b, c);
+           val = val.add(boundR(a, b - 1, c));
+           val = val.add(boundR(a, b, c - 1));
+       }
+
+       //memoize it
+       memo.put(tuple, val);
+       return val;
    }
 }
