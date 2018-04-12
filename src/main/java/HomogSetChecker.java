@@ -11,34 +11,34 @@ import java.util.concurrent.TimeUnit;
 public class HomogSetChecker {
     private static final int NUM_WORKERS = 4;
 
-    public static boolean hasHomogSetSizek(int[][] graph, int k) {
-        return k <= findMaxHomogSetSize(graph, k);
+    public static boolean hasHomogSetSizeK(int[][] graph, int k) {
+        return k <= findMaxHomogSetSize(graph);
     }
 
-    public static int findMaxHomogSetSize(int[][] graph, int k) {
-        int max = -1;
-        for (int[] row : graph) {
-            for (int i : row) {
-                if (i > max) {
-                    max = i;
+    public static int findMaxHomogSetSize(int[][] coloring) {
+        int max = -1, n = coloring.length;
+        for (int r = 0; r < n; ++r) {
+            for (int c = r + 1 ; c < n; ++c) {
+                if (coloring[r][c] > max) {
+                    max = coloring[r][c];
                 }
             }
         }
-        return findMaxHomogSetSize(graph, k, max);
+        return findMaxHomogSetSize(coloring, max);
     }
 
-    public static int findMaxHomogSetSize(int[][] graph, int k, int maxCol) {
+    public static int findMaxHomogSetSize(int[][] coloring, int maxCol) {
         Queue<Graph<Integer, DefaultEdge>> work= new LinkedList<>();
         for (int currCol = 0; currCol <= maxCol; ++currCol) {
             EdgeFactory<Integer, DefaultEdge> edgeFactory = new ClassBasedEdgeFactory<Integer, DefaultEdge>(DefaultEdge.class);
             Graph<Integer, DefaultEdge> g = new SimpleGraph<Integer, DefaultEdge>(edgeFactory);
             //build graph with edges connecting only if edge colored appropriately
-            for (int r = 0; r < graph.length; ++r) {
-                for (int c = 0; c < graph[0].length; ++c) {
+            for (int r = 0; r < coloring.length; ++r) {
+                for (int c = 0; c < coloring[0].length; ++c) {
                     if (r == c) {
                         continue;
                     }
-                    int color = graph[r][c];
+                    int color = coloring[r][c];
                     if (color == currCol) {
                         g.addEdge(r, c);
                     }

@@ -49,4 +49,22 @@ public class Runner {
             }
         }
     }
+
+    private static int probMinMaxHomogSetSize(int n) {
+        final int NUM_TRIALS = 100;
+        int minMaxHomogSetSize = 1;
+        for (int t = 0; t < NUM_TRIALS; ++t) {
+            int[][] coloring = new int[n][n];
+            for (int r = 0; r < n; ++r) {
+                for (int c = r + 1 ; c < n; ++c) {
+                    int randCol = (int) (Math.random() * 2);
+                    coloring[r][c] = randCol;
+                    coloring[c][r] = randCol;
+                }
+            }
+            int maxHomogSetSize = HomogSetChecker.findMaxHomogSetSize(coloring);
+            minMaxHomogSetSize = Math.min(maxHomogSetSize, minMaxHomogSetSize);
+        }
+        return minMaxHomogSetSize;
+    }
 }
