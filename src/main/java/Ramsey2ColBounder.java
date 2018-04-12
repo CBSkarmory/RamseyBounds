@@ -17,7 +17,7 @@ public class Ramsey2ColBounder {
 
     static private HashMap<Pair<Integer, Integer>, BigInteger> memo;
     static {
-        memo = new HashMap<Pair<Integer, Integer>, BigInteger>();
+        memo = new HashMap<>();
     }
 
     public Ramsey2ColBounder() {

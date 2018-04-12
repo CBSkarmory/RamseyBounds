@@ -33,6 +33,11 @@ public class HomogSetChecker {
             EdgeFactory<Integer, DefaultEdge> edgeFactory = new ClassBasedEdgeFactory<Integer, DefaultEdge>(DefaultEdge.class);
             Graph<Integer, DefaultEdge> g = new SimpleGraph<Integer, DefaultEdge>(edgeFactory);
             //build graph with edges connecting only if edge colored appropriately
+            //vertices
+            for (int i = 0; i < coloring.length; ++i) {
+                g.addVertex(i + 1);
+            }
+            //edges
             for (int r = 0; r < coloring.length; ++r) {
                 for (int c = 0; c < coloring[0].length; ++c) {
                     if (r == c) {
@@ -40,7 +45,7 @@ public class HomogSetChecker {
                     }
                     int color = coloring[r][c];
                     if (color == currCol) {
-                        g.addEdge(r, c);
+                        g.addEdge(r + 1, c + 1);
                     }
                 }
             }
@@ -50,7 +55,7 @@ public class HomogSetChecker {
         ArrayList<Integer> results = new ArrayList<>();
 
 
-        for (int i = 0; i < NUM_WORKERS; ++i) {
+        for (int i = 0; i < Math.min(NUM_WORKERS, maxCol + 1); ++i) {
             Runnable r = new Runnable() {
                 @Override
                 public void run() {

@@ -1,16 +1,7 @@
-import org.jgrapht.EdgeFactory;
-import org.jgrapht.Graph;
-import org.jgrapht.alg.clique.BronKerboschCliqueFinder;
-import org.jgrapht.graph.ClassBasedEdgeFactory;
-import org.jgrapht.graph.DefaultEdge;
-import org.jgrapht.graph.SimpleGraph;
-
-import java.util.Iterator;
-import java.util.Set;
-import java.util.stream.IntStream;
-
 public class Runner {
     public static void main(String[] args) {
+        boundNums();
+        report10to20();
 /*        // testing
         EdgeFactory<Integer, DefaultEdge> edgeFactory = new ClassBasedEdgeFactory<Integer, DefaultEdge>(DefaultEdge.class);
         Graph<Integer, DefaultEdge> g = new SimpleGraph<Integer, DefaultEdge>(edgeFactory);
@@ -30,13 +21,7 @@ public class Runner {
         Iterator<Set<Integer>> it = finder.maximumIterator();
         Set<Integer> clique1 = it.next();
         System.out.println(clique1);*/
-
-        // bounds on numbers
-        //boundNums();
-
     }
-
-
 
     private static void boundNums() {
         Ramsey3ColBounder bounder = new Ramsey3ColBounder();
@@ -50,9 +35,21 @@ public class Runner {
         }
     }
 
+    private static void report10to20() {
+        for (int n = 10; n <= 20; ++n) {
+            int k = probMinMaxHomogSetSize(n) + 1;
+            // no homogeneous set size k
+            System.out.printf("n = %d: encountered case with no homog set size k = %d", n, k);
+            if (k > n) {
+                System.out.print(" -- no LARGE");
+            }
+            System.out.print("\n");
+        }
+    }
+
     private static int probMinMaxHomogSetSize(int n) {
         final int NUM_TRIALS = 100;
-        int minMaxHomogSetSize = 1;
+        int minMaxHomogSetSize = Integer.MAX_VALUE;
         for (int t = 0; t < NUM_TRIALS; ++t) {
             int[][] coloring = new int[n][n];
             for (int r = 0; r < n; ++r) {

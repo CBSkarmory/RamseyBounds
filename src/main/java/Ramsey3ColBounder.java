@@ -17,7 +17,7 @@ public class Ramsey3ColBounder {
 
    private static HashMap<List<Integer>, BigInteger> memo;
    static {
-       memo = new HashMap<List<Integer>, BigInteger>();
+       memo = new HashMap<>();
    }
 
    public Ramsey3ColBounder() {
