@@ -12,6 +12,10 @@ public class HomogSetChecker {
     private static final int NUM_WORKERS = 4;
 
     public static boolean hasHomogSetSizek(int[][] graph, int k) {
+        return k <= findMaxHomogSetSize(graph, k);
+    }
+
+    public static int findMaxHomogSetSize(int[][] graph, int k) {
         int max = -1;
         for (int[] row : graph) {
             for (int i : row) {
@@ -20,10 +24,10 @@ public class HomogSetChecker {
                 }
             }
         }
-        return hasHomogSetSizek(graph, k, max);
+        return findMaxHomogSetSize(graph, k, max);
     }
 
-    public static boolean hasHomogSetSizek(int[][] graph, int k, int maxCol) {
+    public static int findMaxHomogSetSize(int[][] graph, int k, int maxCol) {
         Queue<Graph<Integer, DefaultEdge>> work= new LinkedList<>();
         for (int currCol = 0; currCol <= maxCol; ++currCol) {
             EdgeFactory<Integer, DefaultEdge> edgeFactory = new ClassBasedEdgeFactory<Integer, DefaultEdge>(DefaultEdge.class);
@@ -43,7 +47,7 @@ public class HomogSetChecker {
             work.offer(g);
         }
 
-        ArrayList<Boolean> results = new ArrayList<>();
+        ArrayList<Integer> results = new ArrayList<>();
 
 
         for (int i = 0; i < NUM_WORKERS; ++i) {
@@ -66,15 +70,10 @@ public class HomogSetChecker {
                             Iterator<Set<Integer>> it = finder.maximumIterator();
                             Set<Integer> clique1 = it.next();
                             int maxCliqueSize = clique1.size();
-                            if (maxCliqueSize >= k) {
-                                synchronized (results) {
-                                    results.add(true);
-                                }
-                            } else {
-                                synchronized (results) {
-                                    results.add(false);
-                                }
+                            synchronized (results) {
+                                results.add(maxCliqueSize);
                             }
+
                         }
                     }
 
@@ -92,11 +91,6 @@ public class HomogSetChecker {
                 System.exit(-999);
             }
         }
-        for (boolean b : results) {
-            if (b) {
-                return true;
-            }
-        }
-        return false;
+        return Collections.max(results);
     }
 }
