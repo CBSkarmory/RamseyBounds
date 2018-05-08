@@ -1,13 +1,22 @@
+import org.junit.BeforeClass;
 import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
 
 import java.math.BigInteger;
 
 import static org.junit.Assert.*;
 
 public class Ramsey2ColBounderTest {
+
+    private static Ramsey2ColBounder r;
+
+    @BeforeClass
+    public void setup() {
+        r = new Ramsey2ColBounder();
+    }
+
     @Test
     public void boundRVsKnown() throws Exception {
-        Ramsey2ColBounder r = new Ramsey2ColBounder();
         BigInteger six = new BigInteger("6");
         BigInteger nine = new BigInteger("9");
         BigInteger eighteen = new BigInteger("18");
@@ -31,8 +40,7 @@ public class Ramsey2ColBounderTest {
 
     @Test
     public void boundRThm1() throws Exception {
-        Ramsey2ColBounder r = new Ramsey2ColBounder();
-        int NUM_ITERS = 25, a, b;
+        int NUM_ITERS = 100, a, b;
         for (int t= 0; t < NUM_ITERS; ++t) {
             //randomized testing to make sure R(a, b) = R(b, a)
             a = (int)(Math.random() * 8) + 1;
