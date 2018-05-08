@@ -11,7 +11,7 @@ public class Ramsey2ColBounderTest {
     private static Ramsey2ColBounder r;
 
     @BeforeClass
-    public void setup() {
+    public static void setup() {
         r = new Ramsey2ColBounder();
     }
 
